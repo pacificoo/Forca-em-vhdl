@@ -1,13 +1,13 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
-ENTITY Interface IS --Transforma as saídas da entidade forca
+ENTITY Interface IS
   PORT (
-  		a	:in STD_LOGIC_VECTOR(3 downto 0); --Entrada
-		situ	:out STD_LOGIC_VECTOR(3 DOWNTO 0); --Situação do jogo (Venceu (1100), perdeu (1110) ou ainda jogando (0000))
+  		a	:in STD_LOGIC_VECTOR(3 downto 0);
+		situ	:out STD_LOGIC_VECTOR(3 DOWNTO 0);
 		s0, s1, s2, s3, s4	:OUT STD_LOGIC_VECTOR(3 downto 0);
 		vidas	: out STD_LOGIC_VECTOR(2 downto 0);
-		btn, reset	:in STD_LOGIC
+		btn, reset, clk	:in STD_LOGIC
     );
 END Interface;
 
@@ -18,7 +18,7 @@ component Forca is
 	PORT (a	:in STD_LOGIC_VECTOR(3 downto 0);
 		b0, b1, b2, b3, b4	:OUT STD_LOGIC;
 		situ, vidas	: out STD_LOGIC_VECTOR(1 downto 0);
-		btn, reset	:in STD_LOGIC
+		btn, reset, clk	:in STD_LOGIC
 		);
 	end component;
 
@@ -27,6 +27,7 @@ SIGNAL temp_situ, temp_vidas: STD_LOGIC_VECTOR(1 downto 0);
 
 BEGIN
 	Forc: Forca PORT MAP(
+	clk=> clk,
 	btn => btn,
 	reset => reset,
 	a => a,
@@ -38,8 +39,6 @@ BEGIN
 	situ => temp_situ,
 	vidas => temp_vidas
 	);
-
-	--transforma cada saída em um número binário correspondente caso ela estiver correspondente com algum chute passado do usuário
 
 	s0 <= "0000" when (temp0 = '1' or temp_situ = "01") else
 		 "1111";
@@ -56,12 +55,10 @@ BEGIN
 	s4 <= "0111" when (temp4 = '1' or temp_situ = "01") else
 		 "1111";
 
-		 -- Diz a situação do jogo
 	situ <= "1110" when temp_situ = "01" else
 		   "1100" when temp_situ = "10" else
 		   "0000";
 
-		   -- Mostra a quantidade de vidas pelos 3 leds usados para isso
 	vidas <= "111" when temp_vidas = "11" else
 			"110" when temp_vidas = "10" else
 			"100" when temp_vidas = "01" else

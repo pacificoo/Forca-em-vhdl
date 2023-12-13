@@ -20,7 +20,7 @@ signal	temp_vidas: STD_LOGIC_VECTOR(1 downto 0) := "11";
 
 BEGIN
 
-	processo : process (btn, reset)
+	processo : process (btn)
 		begin
 			if (reset = '1') then -- Reseta a situação do jogo
 				temp0 <= '0';
@@ -32,15 +32,15 @@ BEGIN
 				temp_vidas <= "11";
 
 			elsif rising_edge(btn) then -- A cada sinal de subida do botão, faz o chute correspondente à entrada a.
-				if (a = "0000" or temp_vidas = "00") then
+				if (a = "0000") then
 					temp0 <= '1';
-				elsif (a = "0001" or temp_vidas = "00") then
+				elsif (a = "0001") then
 					temp3 <= '1';
-				elsif (a = "0101" or temp_vidas = "00") then
+				elsif (a = "0101") then
 					temp1 <= '1';
-				elsif (a = "0110" or temp_vidas = "00") then
+				elsif (a = "0110") then
 					temp2 <= '1';
-				elsif (a = "0111" or temp_vidas = "00") then
+				elsif (a = "0111") then
 					temp4 <= '1';
 				else -- Se o chute foi errado, uma vida é perdida
 					if (temp_vidas = "11") then

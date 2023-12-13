@@ -58,7 +58,7 @@ END COMPONENT LCD;
 		situ => temp_situ,
 		vidas => vida
 	);
-	 LCD1: LCD port map(temp0, temp1, temp2, temp3, temp4, resultado, CLOCK_50, RS, RW, E, DB, a);
+	 LCD1: LCD port map(temp4, temp3, temp2, temp1, temp0, temp_situ, CLOCK_50, RS, RW, E, DB, a);
 
 	 vidas<=vida; -- atribuindo a saida a variavel que sai de forca.vhd
 
