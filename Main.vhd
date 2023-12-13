@@ -1,12 +1,12 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity Main is
+entity Main is --Entidade para unificar todas as entidades usadas
 port(
     
-    	CLOCK_50, btn, reset    : in std_logic; ---clock do contador
-    	a    : in std_logic_vector (3 downto 0); ----- switches da placa   
-    	vidas         : out std_logic_vector (2 downto 0) := (others => '0'); ------ leds 
+    	CLOCK_50, btn, reset    : in std_logic; --clock, botão para chute e botão de reset
+    	a    : in std_logic_vector (3 downto 0); -- switches da placa
+    	vidas         : out std_logic_vector (2 downto 0) := (others => '0'); -- leds para exibição de vidas
 	RS, RW      : out bit; -- lcd
     	E           : buffer bit;  --lcd
 	DB          : out bit_vector(7 downto 0) --lcd 

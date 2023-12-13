@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 
-		entity LCD is
+		entity LCD is --Entidade para exibição das informações da forca no display lcd da placa fpga
 		generic (fclk: natural := 50_000_000); -- 50MHz
 		port (
 				revelado0, revelado1, revelado2, revelado3, revelado4, resultado : in std_logic_vector(3 downto 0);-- NUMEROS A SEREM REVELADOS
@@ -50,7 +50,7 @@ use ieee.std_logic_1164.all;
 		begin
 		case pr_state is
 
---INICIALIZAÇÃO E DEFINIÇÃO -------
+--INICIALIZAÇÃO E DEFINIÇÃO--
 		when FunctionSetl => 
 		RS<= '0'; RW<= '0'; 
 		DB<= "00111000"; 
